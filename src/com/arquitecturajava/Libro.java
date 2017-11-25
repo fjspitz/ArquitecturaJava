@@ -1,13 +1,17 @@
 package com.arquitecturajava;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Libro {
 	private String isbn;
 	private String titulo;
 	private String categoria;
+	
+	/**
+	 * Este constructor genérico se añade para permitir el uso de genéricos 
+	 * en la clase DataBaseHelper.
+	 */
+	public Libro() {}
 	
 	public Libro(String isbn, String titulo, String categoria) {
 		super();
@@ -39,43 +43,25 @@ public class Libro {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
+	
+	public static List<Libro> buscarTodos() {
+		String consultaSQL = "select isbn, titulo, categoria from libros";
+		DataBaseHelper<Libro> dbh = new DataBaseHelper<Libro>();
+		List<Libro> listaDeLibros = dbh.seleccionarRegistros(consultaSQL, Libro.class);
+		return listaDeLibros;
+	}
 
-	public static ArrayList<String> buscarTodasLasCategorias( ) {
+	public static List<String> buscarTodasLasCategorias( ) {
 		String consultaSQL = "select distinct(categoria) from libros";
-		DataBaseHelper dbh = new DataBaseHelper();
-		ResultSet rs = dbh.seleccionarRegistros(consultaSQL);
-		ArrayList<String> listaDeCategorias = new ArrayList<String>();
-		
-		try {
-			while(rs.next()) {
-				listaDeCategorias.add(rs.getString("categoria"));
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+		DataBaseHelper<String> dbh = new DataBaseHelper<String>();
+		List<String> listaDeCategorias = dbh.seleccionarRegistros(consultaSQL, String.class);
 		return listaDeCategorias;
 	}
 	
 	public void insertar() {
 		String consultaSQL = "insert into libros (isbn, titulo, categoria) values ";
 		consultaSQL += "('" + this.isbn + "','" + this.titulo + "','" + this.categoria + "')";
-		DataBaseHelper dbh = new DataBaseHelper();
+		DataBaseHelper<Libro> dbh = new DataBaseHelper<Libro>();
 		dbh.modificarRegistro(consultaSQL);
-	}
-	
-	public static ArrayList<Libro> buscarTodos() {
-		String consultaSQL = "select isbn, titulo, categoria from libros";
-		DataBaseHelper dbh = new DataBaseHelper();
-		ResultSet rs = dbh.seleccionarRegistros(consultaSQL);
-		ArrayList<Libro> listaDeLibros = new ArrayList<Libro>();
-		
-		try {
-			while(rs.next()) {
-				listaDeLibros.add(new Libro(rs.getString("isbn"), rs.getString("titulo"), rs.getString("categoria")));
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return listaDeLibros;
 	}
 }
