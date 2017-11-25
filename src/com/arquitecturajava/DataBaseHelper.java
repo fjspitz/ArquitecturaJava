@@ -27,14 +27,17 @@ public class DataBaseHelper<T> {
 			filasAfectadas = sentencia.executeUpdate(consultaSQL);
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error driver: " + e.getMessage());
+			throw new DataBaseException("Error de driver", e);
 		} catch (SQLException e) {
 			System.out.println("Error de SQL: " + e.getMessage());
+			throw new DataBaseException("Error de SQL", e);
 		} finally {
 			if (sentencia != null) {
 				try {
 					sentencia.close();
 				} catch (SQLException e) {
 					System.out.println("Error cerrando la sentencia: " + e.getMessage());
+					throw new DataBaseException("Clase no encontrada", e);
 				}
 			}
 			
@@ -43,6 +46,7 @@ public class DataBaseHelper<T> {
 					conexion.close();
 				} catch (SQLException e) {
 					System.out.println("Error cerrando la conexion: " + e.getMessage());
+					throw new DataBaseException("Error de SQL", e);
 				}
 			}
 		}
