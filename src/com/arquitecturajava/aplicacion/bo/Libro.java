@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.Query;
@@ -16,7 +18,9 @@ public class Libro {
 	@Id 
 	private String isbn;
 	private String titulo;
-	private String categoria;
+	@ManyToOne
+	@JoinColumn(name="categoria")
+	private Categoria categoria;
 	
 	/**
 	 * Este constructor genérico se añade para permitir el uso de genéricos 
@@ -40,7 +44,7 @@ public class Libro {
 		this.isbn = isbn;
 	}
 	
-	public Libro(String isbn, String titulo, String categoria) {
+	public Libro(String isbn, String titulo, Categoria categoria) {
 		super();
 		this.isbn = isbn;
 		this.titulo = titulo;
@@ -63,11 +67,11 @@ public class Libro {
 		this.titulo = titulo;
 	}
 
-	public String getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 	
@@ -75,7 +79,7 @@ public class Libro {
 	public static List<Libro> buscarTodos() {
 		SessionFactory factoriaSession = HibernateHelper.getSessionFactory();
 		Session session = factoriaSession.openSession();
-		List<Libro> listaDeLibros = session.createQuery("from Libro libro").list();
+		List<Libro> listaDeLibros = session.createQuery("from Libro libro right join fetch libro.categoria").list();
 		session.close();
 		return listaDeLibros;
 	}

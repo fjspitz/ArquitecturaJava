@@ -3,6 +3,7 @@ package com.arquitecturajava.aplicacion.controlador.acciones;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 
 public class InsertarLibroAccion extends Accion {
@@ -13,7 +14,7 @@ public class InsertarLibroAccion extends Accion {
 		String titulo = request.getParameter("titulo");
 		String categoria = request.getParameter("categoria");
 		
-		Libro libro = new Libro(isbn, titulo, categoria);
+		Libro libro = new Libro(isbn, titulo, new Categoria(categoria));
 		libro.insertar();
 		return "MostrarLibros.do";
 	}

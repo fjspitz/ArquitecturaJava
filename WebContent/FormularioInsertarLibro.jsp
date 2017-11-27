@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <%@ page import="java.util.List" %>
-<%@ page import="com.arquitecturajava.aplicacion.bo.Libro"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
@@ -22,7 +20,7 @@
 				
 				<select name="categoria">
 					<c:forEach var="categoria" items="${listaDeCategorias}">
-						<option value="${categoria}">${categoria}</option>
+						<option value="${categoria.id}">${categoria.descripcion}</option>
 					</c:forEach>
 				</select>
 				<br/>

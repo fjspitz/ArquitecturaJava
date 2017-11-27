@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
-<%@ page import="com.arquitecturajava.aplicacion.bo.Libro" %>
-<%@ page import="java.util.List" %>
-
+   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-	Libro libro = Libro.buscarPorClave(request.getParameter("isbn"));
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,7 +20,7 @@
 			<p><label for="categoria">Categoría:</label>
 			<select name="categoria">
 				<c:forEach var="categoria" items="${listaDeCategorias}">
-					<option value="${categoria}">${categoria}</option>
+					<option value="${categoria.id}">${categoria.descripcion}</option>
 				</c:forEach>
 			</select>
 			<br/></p>
