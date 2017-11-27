@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ page import="com.arquitecturajava.Libro" %>
+<%@ page import="com.arquitecturajava.aplicacion.Libro" %>
 <%@ page import="java.util.List" %>
 <%
 	Libro libro = Libro.buscarPorClave(request.getParameter("isbn"));
@@ -13,7 +13,7 @@
 	<title>Editar libro</title>
 </head>
 <body>
-	<form id="formularioEdicion" action="SalvarLibro.jsp">
+	<form id="formularioEdicion" action="ModificarLibro.do">
 		<fieldset>
 			<legend>Formulario de edición de libro</legend>
 			<p><label for="isbn">ISBN:</label>

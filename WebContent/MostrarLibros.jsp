@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ page import="java.util.List" %>    
-<%@ page import="com.arquitecturajava.Libro" %>
+<%@ page import="com.arquitecturajava.aplicacion.Libro" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,37 +11,34 @@
 	<title>Lista de libros</title>
 </head>
 <body>
-	<form name="filtroCategoria">
+	<form name="filtroCategoria" action="filtrar.do">
 		<select name="categoria">
 		<option value="seleccionar">seleccionar</option>
 		<%
 			List<String> listaDeCategorias = null;
-			listaDeCategorias = Libro.buscarTodasLasCategorias();
-			for (String categoria : listaDeCategorias) { %>
+			listaDeCategorias = (List<String>)request.getAttribute("listaDeCategorias");
+			for (String categoria : listaDeCategorias) {
+				if (categoria.equals(request.getParameter("categoria"))) {
+			%>
+			<option value="<%=categoria%>" selected><%=categoria%></option>
+			<% } else { %>
 			<option value="<%=categoria%>"><%=categoria%></option>
-			<% } %>
+			<% }} %>
 		</select>
 		<input name="filtrar" type="submit" value="Filtrar"/>
 	</form>
 	<br/>
 <%
-	List<Libro> listaDeLibros = null;
-	if (request.getParameter("categoria") == null ||
-		request.getParameter("categoria").equals("seleccionar")) {
-			listaDeLibros = Libro.buscarTodos();			
-		}
-		else {
-			listaDeLibros = Libro.buscarPorCategoria(request.getParameter("categoria"));
-		}
+	List<Libro> listaDeLibros = (List<Libro>)request.getAttribute("listaDeLibros");
 	for (Libro libro : listaDeLibros) { %>
 			<%=libro.getIsbn() %>
 			<%=libro.getTitulo() %>
 			<%=libro.getCategoria() %>
-			<a href="BorrarLibro.jsp?isbn=<%=libro.getIsbn()%>">Borrar</a>
-			<a href="FormularioEditarLibro.jsp?isbn=<%=libro.getIsbn()%>">Editar</a>
+			<a href="BorrarLibro.do?isbn=<%=libro.getIsbn()%>">Borrar</a>
+			<a href="FormularioEditarLibro.do?isbn=<%=libro.getIsbn()%>">Editar</a>
 			<br/>
 	<% } 
 %>
-	<a href="FormularioInsertarLibro.jsp">Insertar libro</a>
+	<a href="FormularioInsertarLibro.do">Insertar libro</a>
 </body>
 </html>
