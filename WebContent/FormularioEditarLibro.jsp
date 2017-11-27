@@ -3,6 +3,9 @@
     
 <%@ page import="com.arquitecturajava.aplicacion.Libro" %>
 <%@ page import="java.util.List" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	Libro libro = Libro.buscarPorClave(request.getParameter("isbn"));
 %>
@@ -17,22 +20,14 @@
 		<fieldset>
 			<legend>Formulario de edición de libro</legend>
 			<p><label for="isbn">ISBN:</label>
-			<input type="text" id="isbn" name="isbn" value="<%=libro.getIsbn()%>"/></p>
+			<input type="text" id="isbn" name="isbn" value="${libro.isbn}"/></p>
 			<p><label for="titulo">Titulo:</label>
-			<input type="text" id="titulo" name="titulo" value="<%=libro.getTitulo()%>"/></p>
+			<input type="text" id="titulo" name="titulo" value="${libro.titulo}"/></p>
 			<p><label for="categoria">Categoría:</label>
 			<select name="categoria">
-			<%
-				List<String> listaDeCategorias = null;
-				listaDeCategorias = Libro.buscarTodasLasCategorias();
-				for (String categoria : listaDeCategorias) {
-					if (libro.getCategoria().equals(categoria)) { %>
-					<option value="<%=categoria%>" selected="selected">
-					<%=categoria%></option>
-					<%} else {%>
-					<option value="<%=categoria%>"><%=categoria%></option>
-					<% }
-				} %>
+				<c:forEach var="categoria" items="${listaDeCategorias}">
+					<option value="${categoria}">${categoria}</option>
+				</c:forEach>
 			</select>
 			<br/></p>
 			<p><input type="submit" value="Salvar"/></p>

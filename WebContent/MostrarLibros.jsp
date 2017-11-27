@@ -4,6 +4,8 @@
 <%@ page import="java.util.List" %>    
 <%@ page import="com.arquitecturajava.aplicacion.Libro" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,32 +15,20 @@
 <body>
 	<form name="filtroCategoria" action="filtrar.do">
 		<select name="categoria">
-		<option value="seleccionar">seleccionar</option>
-		<%
-			List<String> listaDeCategorias = null;
-			listaDeCategorias = (List<String>)request.getAttribute("listaDeCategorias");
-			for (String categoria : listaDeCategorias) {
-				if (categoria.equals(request.getParameter("categoria"))) {
-			%>
-			<option value="<%=categoria%>" selected><%=categoria%></option>
-			<% } else { %>
-			<option value="<%=categoria%>"><%=categoria%></option>
-			<% }} %>
+			<option value="seleccionar">seleccionar</option>
+			<c:forEach var="categoria" items="${listaDeCategorias}">
+				<option value="${categoria}">${categoria}</option>
+			</c:forEach>
 		</select>
 		<input name="filtrar" type="submit" value="Filtrar"/>
 	</form>
 	<br/>
-<%
-	List<Libro> listaDeLibros = (List<Libro>)request.getAttribute("listaDeLibros");
-	for (Libro libro : listaDeLibros) { %>
-			<%=libro.getIsbn() %>
-			<%=libro.getTitulo() %>
-			<%=libro.getCategoria() %>
-			<a href="BorrarLibro.do?isbn=<%=libro.getIsbn()%>">Borrar</a>
-			<a href="FormularioEditarLibro.do?isbn=<%=libro.getIsbn()%>">Editar</a>
-			<br/>
-	<% } 
-%>
+	<c:forEach var="libro" items="${listaDeLibros}">
+		${libro.isbn} ${libro.titulo} ${libro.categoria}
+		<a href="BorrarLibro.do?isbn=${libro.isbn}">Borrar</a>
+		<a href="FormularioEditarLibro.do?isbn=${libro.isbn}">Editar</a>
+		<br/>
+	</c:forEach>
 	<a href="FormularioInsertarLibro.do">Insertar libro</a>
 </body>
 </html>
