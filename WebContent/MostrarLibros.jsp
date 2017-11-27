@@ -13,7 +13,7 @@
 	<title>Lista de libros</title>
 </head>
 <body>
-	<form name="filtroCategoria" action="filtrar.do">
+	<form name="filtroCategoria" action="FiltrarLibrosPorCategoria.do">
 		<select name="categoria">
 			<option value="seleccionar">seleccionar</option>
 			<c:forEach var="categoria" items="${listaDeCategorias}">

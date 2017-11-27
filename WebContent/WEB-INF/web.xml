@@ -20,7 +20,7 @@
 		<description>Despachador de control</description>
 		<display-name>ControladorLibros</display-name>
 		<servlet-name>ControladorLibros</servlet-name>
-		<servlet-class>com.arquitecturajava.aplicacion.ControladorLibros</servlet-class>
+		<servlet-class>com.arquitecturajava.aplicacion.controlador.ControladorLibros</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
