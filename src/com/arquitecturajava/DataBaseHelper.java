@@ -6,10 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.Method;
 import java.sql.Connection;
 
 public class DataBaseHelper<T> {
+	private static final Logger log = Logger.getLogger(DataBaseHelper.class.getPackage().getName());
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost/arquitecturajava";
 	private static final String USUARIO = "arqjava";
@@ -26,17 +30,17 @@ public class DataBaseHelper<T> {
 			sentencia = conexion.createStatement();
 			filasAfectadas = sentencia.executeUpdate(consultaSQL);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error driver: " + e.getMessage());
+			log.error("Error driver: " + e.getMessage());
 			throw new DataBaseException("Error de driver", e);
 		} catch (SQLException e) {
-			System.out.println("Error de SQL: " + e.getMessage());
+			log.error("Error de SQL: " + e.getMessage());
 			throw new DataBaseException("Error de SQL", e);
 		} finally {
 			if (sentencia != null) {
 				try {
 					sentencia.close();
 				} catch (SQLException e) {
-					System.out.println("Error cerrando la sentencia: " + e.getMessage());
+					log.error("Error cerrando la sentencia: " + e.getMessage());
 					throw new DataBaseException("Clase no encontrada", e);
 				}
 			}
@@ -45,7 +49,7 @@ public class DataBaseHelper<T> {
 				try {
 					conexion.close();
 				} catch (SQLException e) {
-					System.out.println("Error cerrando la conexion: " + e.getMessage());
+					log.error("Error cerrando la conexion: " + e.getMessage());
 					throw new DataBaseException("Error de SQL", e);
 				}
 			}
@@ -81,17 +85,17 @@ public class DataBaseHelper<T> {
 				listaDeObjetos.add(objeto);
 			}
 		} catch (Exception e) {
-			System.out.println("Error al seleccionar registros.");
+			log.error("Error al seleccionar registros.");
 			e.printStackTrace();
 		} finally {
 			if (sentencia != null) {
 				try {sentencia.close();} catch (SQLException e) {
-					System.out.println("Error al cerrar sentencia: " + e.getMessage());
+					log.error("Error al cerrar sentencia: " + e.getMessage());
 				}
 			}
 			if (conexion != null) {
 				try {conexion.close();} catch (SQLException e) {
-					System.out.println("Error al cerrar la conexion: " + e.getMessage());
+					log.error("Error al cerrar la conexion: " + e.getMessage());
 				}
 			}
 		}
