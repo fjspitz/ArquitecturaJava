@@ -2,11 +2,18 @@ package com.arquitecturajava.aplicacion.bo;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+@Entity
+@Table(name="libros")
 public class Libro {
+	@Id 
 	private String isbn;
 	private String titulo;
 	private String categoria;
