@@ -27,4 +27,19 @@ public class LibroDaoJpaImpl extends GenericDaoJpaImpl<Libro, String> implements
 		}
 		return listaDeLibros;
 	}
+	
+	@Override
+	public List<Libro> buscarTodos() {
+		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
+		EntityManager manager = factoriaSession.createEntityManager();
+		List<Libro> listaDeObjetos = null;
+		
+		try {
+			TypedQuery<Libro> consulta = manager.createQuery("select l from Libro l JOIN FETCH l.categoria", Libro.class);
+			listaDeObjetos = consulta.getResultList();
+			return listaDeObjetos;
+		} finally {
+			manager.close();
+		}
+	}
 }
