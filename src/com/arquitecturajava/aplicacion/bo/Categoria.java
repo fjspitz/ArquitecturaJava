@@ -3,17 +3,13 @@ package com.arquitecturajava.aplicacion.bo;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.TypedQuery;
 
 @Entity
 @Table(name="categorias")
-
 public class Categoria {
 	@Id 
 	private String id;
@@ -60,19 +56,5 @@ public class Categoria {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-	
-	public static List<Categoria> buscarTodos() {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
-		TypedQuery<Categoria> consulta = manager.createQuery("select c from Categoria c", Categoria.class);
-		List<Categoria> listaDeCategorias = null;
-
-		try {
-			listaDeCategorias = consulta.getResultList();
-		} finally {
-			manager.close();
-		}
-		return listaDeCategorias;
 	}
 }

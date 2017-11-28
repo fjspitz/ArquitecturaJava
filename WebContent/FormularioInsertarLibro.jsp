@@ -18,7 +18,8 @@
 				<p><label for="titulo">Titulo:</label><input type="text" id="titulo" name="titulo"/><br/></p>
 				<p><label for="categoria">Categoria:</label>
 				
-				<select name="categoria">
+				<select id="categoria" name="categoria">
+					<option value="">Seleccionar</option>
 					<c:forEach var="categoria" items="${listaDeCategorias}">
 						<option value="${categoria.id}">${categoria.descripcion}</option>
 					</c:forEach>

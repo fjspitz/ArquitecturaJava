@@ -24,9 +24,21 @@
 	<br/>
 	
 	<display:table list="${listaDeLibros}">
-		<display:column property="isbn"		title="ISBN"/>
-		<display:column property="titulo"	title="Título"/>
+		<display:column property="isbn"	title="ISBN"/>
+		<display:column property="titulo"		title="Título"/>
 		<display:column property="categoria.descripcion" title="Categoría"/>
+		<display:column title="Borrar" 
+			href="BorrarLibro.do" 
+			paramId="isbn" 
+			paramProperty="isbn"> 
+			Borrar
+		</display:column>
+		<display:column title="Editar" 
+			href="FormularioEditarLibro.do"
+			paramId="isbn" 
+			paramProperty="isbn">
+			Editar
+		</display:column>
 	</display:table>
 	
 	<!-- 

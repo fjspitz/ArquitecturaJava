@@ -14,13 +14,13 @@
 		<fieldset>
 			<legend>Formulario de edición de libro</legend>
 			<p><label for="isbn">ISBN:</label>
-			<input type="text" id="isbn" name="isbn" value="${libro.isbn}"/></p>
+			<input disabled="disabled" type="text" id="isbn" name="isbn" value="${libro.isbn}"/></p>
 			<p><label for="titulo">Titulo:</label>
 			<input type="text" id="titulo" name="titulo" value="${libro.titulo}"/></p>
 			<p><label for="categoria">Categoría:</label>
 			<select name="categoria">
 				<c:forEach var="categoria" items="${listaDeCategorias}">
-					<option value="${categoria.id}">${categoria.descripcion}</option>
+					<option value="${categoria.id}" <c:if test="${categoria.id == libro.categoria.id}">selected</c:if>>${categoria.descripcion}</option>
 				</c:forEach>
 			</select>
 			<br/></p>
