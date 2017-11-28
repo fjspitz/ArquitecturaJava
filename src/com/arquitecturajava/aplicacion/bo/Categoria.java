@@ -3,13 +3,13 @@ package com.arquitecturajava.aplicacion.bo;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.persistence.TypedQuery;
 
 @Entity
 @Table(name="categorias")
@@ -62,12 +62,17 @@ public class Categoria {
 		this.descripcion = descripcion;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static List<Categoria> buscarTodos() {
-		SessionFactory factoriaSession = HibernateHelper.getSessionFactory();
-		Session session = factoriaSession.openSession();
-		List<Categoria> listaDeCategorias = session.createQuery("from Categoria categoria").list();
-		session.close();
+		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
+		EntityManager manager = factoriaSession.createEntityManager();
+		TypedQuery<Categoria> consulta = manager.createQuery("select c from Categoria c", Categoria.class);
+		List<Categoria> listaDeCategorias = null;
+
+		try {
+			listaDeCategorias = consulta.getResultList();
+		} finally {
+			manager.close();
+		}
 		return listaDeCategorias;
 	}
 }
