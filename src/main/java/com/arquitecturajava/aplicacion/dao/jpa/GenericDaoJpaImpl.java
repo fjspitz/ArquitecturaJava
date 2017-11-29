@@ -1,4 +1,4 @@
-package com.arquitecturajava.aplicacion.controlador.dao.jpa;
+package com.arquitecturajava.aplicacion.dao.jpa;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;

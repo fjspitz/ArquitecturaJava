@@ -1,4 +1,4 @@
-package com.arquitecturajava.aplicacion.controlador.dao.hibernate;
+package com.arquitecturajava.aplicacion.dao.hibernate;
 
 import java.util.List;
 

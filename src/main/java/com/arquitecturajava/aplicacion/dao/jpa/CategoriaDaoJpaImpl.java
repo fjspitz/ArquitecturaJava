@@ -1,4 +1,4 @@
-package com.arquitecturajava.aplicacion.controlador.dao.jpa;
+package com.arquitecturajava.aplicacion.dao.jpa;
 
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.dao.CategoriaDao;
