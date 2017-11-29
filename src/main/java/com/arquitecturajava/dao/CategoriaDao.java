@@ -7,4 +7,6 @@ import com.arquitecturajava.aplicacion.bo.Categoria;
 public interface CategoriaDao {
 	
 	public abstract List<Categoria> buscarTodos();
+	
+	public abstract Categoria buscarCategoriaPorClave(String id);
 }

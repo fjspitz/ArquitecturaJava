@@ -2,7 +2,6 @@ package com.arquitecturajava.dao;
 
 import java.util.List;
 
-import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 
 public interface LibroDao {
@@ -17,5 +16,5 @@ public interface LibroDao {
 	
 	public abstract Libro buscarPorClave(String isbn);
 	
-	public abstract List<Libro> buscarPorCategoria(Categoria categoria);
+	public abstract List<Libro> buscarPorCategoria(String categoria);
 }

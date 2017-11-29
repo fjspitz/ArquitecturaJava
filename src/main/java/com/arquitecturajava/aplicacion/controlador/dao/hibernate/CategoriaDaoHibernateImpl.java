@@ -13,4 +13,10 @@ public class CategoriaDaoHibernateImpl implements CategoriaDao {
 		return null;
 	}
 
+	@Override
+	public Categoria buscarCategoriaPorClave(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

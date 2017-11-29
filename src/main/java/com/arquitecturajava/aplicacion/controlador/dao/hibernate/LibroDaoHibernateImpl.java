@@ -2,7 +2,6 @@ package com.arquitecturajava.aplicacion.controlador.dao.hibernate;
 
 import java.util.List;
 
-import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 import com.arquitecturajava.dao.LibroDao;
 
@@ -39,7 +38,7 @@ public class LibroDaoHibernateImpl implements LibroDao {
 	}
 
 	@Override
-	public List<Libro> buscarPorCategoria(Categoria categoria) {
+	public List<Libro> buscarPorCategoria(String categoria) {
 		// TODO Auto-generated method stub
 		return null;
 	}
