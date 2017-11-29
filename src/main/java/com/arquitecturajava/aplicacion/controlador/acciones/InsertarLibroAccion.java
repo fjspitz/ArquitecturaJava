@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
-import com.arquitecturajava.dao.DaoAbstractFactory;
-import com.arquitecturajava.dao.LibroDao;
+import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
+import com.arquitecturajava.aplicacion.servicios.impl.ServicioLibrosImpl;
 
 public class InsertarLibroAccion extends Accion {
 
@@ -16,9 +16,9 @@ public class InsertarLibroAccion extends Accion {
 		String titulo = request.getParameter("titulo");
 		String categoria = request.getParameter("categoria");
 		
-		LibroDao libroDao = DaoAbstractFactory.getInstance().getLibroDao();
+		ServicioLibros servicioLibros = new ServicioLibrosImpl();
 		Libro libro = new Libro(isbn, titulo, new Categoria(categoria));
-		libroDao.insertar(libro);
+		servicioLibros.salvarLibro(libro);
 		return "MostrarLibros.do";
 	}
 

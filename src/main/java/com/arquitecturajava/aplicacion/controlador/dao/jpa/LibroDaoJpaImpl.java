@@ -14,7 +14,7 @@ public class LibroDaoJpaImpl extends GenericDaoJpaImpl<Libro, String> implements
 	public List<Libro> buscarPorCategoria(String categoria) {
 		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
 		EntityManager manager = factoriaSession.createEntityManager();
-		TypedQuery<Libro> consulta = manager.createQuery("select l from Libro l where l.categoria=?1", Libro.class);
+		TypedQuery<Libro> consulta = manager.createQuery("select l from Libro l where l.categoria.id=?1", Libro.class);
 		
 		consulta.setParameter(1, categoria);
 		List<Libro> listaDeLibros = null;

@@ -6,16 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.arquitecturajava.aplicacion.bo.Categoria;
-import com.arquitecturajava.dao.CategoriaDao;
-import com.arquitecturajava.dao.DaoAbstractFactory;
+import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
+import com.arquitecturajava.aplicacion.servicios.impl.ServicioLibrosImpl;
 
 public class FormularioInsertarLibroAccion extends Accion {
 
 	@Override
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
+		ServicioLibros servicioLibros = new ServicioLibrosImpl();
 		List<Categoria> listaDeCategorias = null;
-		CategoriaDao categoriaDao = DaoAbstractFactory.getInstance().getCategoriaDao();
-		listaDeCategorias = categoriaDao.buscarTodos();
+		
+		listaDeCategorias = servicioLibros.buscarCategoriasLibros();
 		request.setAttribute("listaDeCategorias", listaDeCategorias);
 		return "FormularioInsertarLibro.jsp";
 	}
