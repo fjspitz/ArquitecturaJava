@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
-import com.arquitecturajava.aplicacion.servicios.impl.ServicioLibrosImpl;
 
 public class FiltrarLibrosPorCategoriaAccion extends Accion {
 
 	@Override
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
-		ServicioLibros servicioLibros = new ServicioLibrosImpl();
+		ServicioLibros servicioLibros = (ServicioLibros) getBean("ServicioLibros", request);
 		List<Libro> listaDeLibros = null;
 		List<Categoria> listaDeCategorias = servicioLibros.buscarCategoriasLibros();
 

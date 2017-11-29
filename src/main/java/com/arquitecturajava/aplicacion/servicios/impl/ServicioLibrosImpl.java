@@ -2,8 +2,6 @@ package com.arquitecturajava.aplicacion.servicios.impl;
 
 import java.util.List;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
@@ -14,18 +12,23 @@ public class ServicioLibrosImpl implements ServicioLibros {
 	
 	private LibroDao libroDao = null;
 	private CategoriaDao categoriaDao = null;
-	
-	public ServicioLibrosImpl() {
-		/*
-		DaoFactory factoria = DaoAbstractFactory.getInstance();
-		libroDao = factoria.getLibroDao();
-		categoriaDao = factoria.getCategoriaDao();
-		*/
-		ClassPathXmlApplicationContext factoria = new ClassPathXmlApplicationContext("contextoAplicacion.xml");
-		libroDao = (LibroDao) factoria.getBean("libroDao");
-		categoriaDao = (CategoriaDao) factoria.getBean("categoriaDao");
+
+	public LibroDao getLibroDao() {
+		return libroDao;
 	}
-	
+
+	public void setLibroDao(LibroDao libroDao) {
+		this.libroDao = libroDao;
+	}
+
+	public CategoriaDao getCategoriaDao() {
+		return categoriaDao;
+	}
+
+	public void setCategoriaDao(CategoriaDao categoriaDao) {
+		this.categoriaDao = categoriaDao;
+	}
+
 	@Override
 	public void salvarLibro(Libro libro) {
 		libroDao.salvar(libro);

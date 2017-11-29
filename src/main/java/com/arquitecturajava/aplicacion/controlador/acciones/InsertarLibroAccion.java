@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 import com.arquitecturajava.aplicacion.servicios.ServicioLibros;
-import com.arquitecturajava.aplicacion.servicios.impl.ServicioLibrosImpl;
 
 public class InsertarLibroAccion extends Accion {
 
@@ -16,7 +15,7 @@ public class InsertarLibroAccion extends Accion {
 		String titulo = request.getParameter("titulo");
 		String categoria = request.getParameter("categoria");
 		
-		ServicioLibros servicioLibros = new ServicioLibrosImpl();
+		ServicioLibros servicioLibros = (ServicioLibros) getBean("ServicioLibros", request);
 		Libro libro = new Libro(isbn, titulo, new Categoria(categoria));
 		servicioLibros.salvarLibro(libro);
 		return "MostrarLibros.do";

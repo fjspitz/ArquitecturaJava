@@ -16,6 +16,15 @@ import com.arquitecturajava.dao.GenericDao;
 public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements GenericDao<T, Id> {
 	private static final Logger log = Logger.getLogger("GenericDaoJpaImpl");
 	private Class<T> claseDePersistencia;
+	private EntityManagerFactory entityManagerFactory;
+	
+	public EntityManagerFactory getEntityManagerFactory() {
+		return entityManagerFactory;
+	}
+	
+	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+		this.entityManagerFactory = entityManagerFactory;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public GenericDaoJpaImpl() {
@@ -24,8 +33,7 @@ public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements G
 	
 	@Override
 	public T buscarPorClave(Id id) {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
+		EntityManager manager = getEntityManagerFactory().createEntityManager();
 		T objeto = null;
 		
 		try {
@@ -38,8 +46,7 @@ public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements G
 
 	@Override
 	public List<T> buscarTodos() {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
+		EntityManager manager = getEntityManagerFactory().createEntityManager();
 		List<T> listaDeObjetos = null;
 		
 		try {
@@ -53,8 +60,7 @@ public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements G
 	
 	@Override
 	public void insertar(T objeto) {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
+		EntityManager manager = getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		
 		log.info("Por agregar un elemento en la base");
@@ -75,8 +81,7 @@ public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements G
 
 	@Override
 	public void salvar(T objeto) {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
+		EntityManager manager = getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		
 		try {
@@ -94,8 +99,7 @@ public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements G
 
 	@Override
 	public void borrar(T objeto) {
-		EntityManagerFactory factoriaSession = JPAHelper.getJPAFactory();
-		EntityManager manager = factoriaSession.createEntityManager();
+		EntityManager manager = getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = null;
 		
 		try {

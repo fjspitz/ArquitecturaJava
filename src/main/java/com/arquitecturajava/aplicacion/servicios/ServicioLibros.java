@@ -4,8 +4,18 @@ import java.util.List;
 
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
+import com.arquitecturajava.dao.CategoriaDao;
+import com.arquitecturajava.dao.LibroDao;
 
 public interface ServicioLibros {
+	
+	public LibroDao getLibroDao();
+	
+	public void setLibroDao(LibroDao libroDao);
+	
+	public CategoriaDao getCategoriaDao();
+	
+	public void setCategoriaDao(CategoriaDao categoriaDao);
 	
 	public void salvarLibro(Libro libro);
 	
