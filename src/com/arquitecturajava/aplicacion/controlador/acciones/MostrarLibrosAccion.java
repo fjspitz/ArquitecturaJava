@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 import com.arquitecturajava.aplicacion.dao.CategoriaDao;
+import com.arquitecturajava.aplicacion.dao.DaoAbstractFactory;
+import com.arquitecturajava.aplicacion.dao.DaoFactory;
 import com.arquitecturajava.aplicacion.dao.LibroDao;
-import com.arquitecturajava.aplicacion.dao.jpa.CategoriaDaoJpaImpl;
-import com.arquitecturajava.aplicacion.dao.jpa.LibroDaoJpaImpl;
 
 public class MostrarLibrosAccion extends Accion {
 
 	@Override
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
-		
-		LibroDao libroDao = new LibroDaoJpaImpl();
-		CategoriaDao categoriaDao = new CategoriaDaoJpaImpl();
+		DaoFactory factoria = DaoAbstractFactory.getInstance();
+		LibroDao libroDao = factoria.getLibroDao();
+		CategoriaDao categoriaDao = factoria.getCategoriaDao();
 		
 		List<Libro> listaDeLibros = libroDao.buscarTodos();
 		List<Categoria> listaDeCategorias = categoriaDao.buscarTodos();

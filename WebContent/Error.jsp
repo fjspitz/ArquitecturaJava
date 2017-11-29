@@ -9,6 +9,5 @@
 </head>
 <body>
 	<p>Ha ocurrido un error en la aplicación: <%=exception.getMessage()%></p>
-	<p>Error interno: <%=exception.getCause().getMessage()%></p>
 </body>
 </html>

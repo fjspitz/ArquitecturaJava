@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.arquitecturajava.aplicacion.bo.Categoria;
 import com.arquitecturajava.aplicacion.bo.Libro;
 import com.arquitecturajava.aplicacion.dao.CategoriaDao;
+import com.arquitecturajava.aplicacion.dao.DaoAbstractFactory;
 import com.arquitecturajava.aplicacion.dao.LibroDao;
-import com.arquitecturajava.aplicacion.dao.jpa.CategoriaDaoJpaImpl;
-import com.arquitecturajava.aplicacion.dao.jpa.LibroDaoJpaImpl;
 
 public class FormularioEditarLibroAccion extends Accion {
 
@@ -18,8 +17,8 @@ public class FormularioEditarLibroAccion extends Accion {
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response) {
 		String isbn = request.getParameter("isbn");
 		
-		CategoriaDao categoriaDao = new CategoriaDaoJpaImpl();
-		LibroDao libroDao = new LibroDaoJpaImpl();
+		CategoriaDao categoriaDao = DaoAbstractFactory.getInstance().getCategoriaDao();
+		LibroDao libroDao = DaoAbstractFactory.getInstance().getLibroDao();
 		List<Categoria> listaDeCategorias = categoriaDao.buscarTodos();
 		Libro libro = libroDao.buscarPorClave(isbn);
 		

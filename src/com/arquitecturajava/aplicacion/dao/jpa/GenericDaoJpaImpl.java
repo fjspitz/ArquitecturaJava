@@ -4,6 +4,7 @@ import java.lang.reflect.ParameterizedType;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,6 +15,7 @@ import javax.persistence.TypedQuery;
 import com.arquitecturajava.aplicacion.dao.GenericDao;
 
 public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements GenericDao<T, Id> {
+	private static final Logger log = Logger.getLogger("GenericDaoJpaImpl");
 	private Class<T> claseDePersistencia;
 	
 	@SuppressWarnings("unchecked")
@@ -56,12 +58,15 @@ public abstract class GenericDaoJpaImpl<T, Id extends Serializable> implements G
 		EntityManager manager = factoriaSession.createEntityManager();
 		EntityTransaction tx = null;
 		
+		log.info("Por agregar un elemento en la base");
 		try {
 			tx = manager.getTransaction();
 			tx.begin();
 			manager.persist(objeto);
 			tx.commit();
+			log.info("Se agregó el elemento a la base");
 		} catch (PersistenceException e) {
+			log.severe("Se produjo un error al guardar: " + e.getMessage());
 			tx.rollback();
 			throw e;
 		} finally {
