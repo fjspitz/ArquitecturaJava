@@ -14,7 +14,7 @@
 		<fieldset>
 			<legend>Formulario de edición de libro</legend>
 			<p><label for="isbn">ISBN:</label>
-			<input disabled="disabled" type="text" id="isbn" name="isbn" value="${libro.isbn}"/></p>
+			<input readonly="readonly" type="text" id="isbn" name="isbn" value="${libro.isbn}"/></p>
 			<p><label for="titulo">Titulo:</label>
 			<input type="text" id="titulo" name="titulo" value="${libro.titulo}"/></p>
 			<p><label for="categoria">Categoría:</label>
