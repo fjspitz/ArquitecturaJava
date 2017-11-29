@@ -15,7 +15,7 @@ public class InsertarLibroAccion extends Accion {
 		String titulo = request.getParameter("titulo");
 		String categoria = request.getParameter("categoria");
 		
-		ServicioLibros servicioLibros = (ServicioLibros) getBean("ServicioLibros", request);
+		ServicioLibros servicioLibros = (ServicioLibros) getBean("servicioLibros", request);
 		Libro libro = new Libro(isbn, titulo, new Categoria(categoria));
 		servicioLibros.salvarLibro(libro);
 		return "MostrarLibros.do";
